@@ -11,9 +11,9 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/student">
+            <a class="nav-link collapsed" href="{{ route('pegawai.index') }}">
                 <i class="bi bi-grid"></i>
-                <span>Data</span>
+                <span>Data Pegawai</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
