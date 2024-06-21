@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
@@ -34,11 +34,13 @@ class PegawaiController extends Controller
         // dd($request->all());
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:pegawai,email|max:255',
+            'email' => 'required|email|unique:pegawais,email|max:255',
             'umur' => 'required|integer|min:0',
-            'position' => 'required|string|max:255',
+            'posisi' => 'required|string|max:255',
             'cv' => 'nullable|mimes:pdf|max:2048',
         ]);
+
+
 
         // Menyimpan file CV jika ada
         if ($request->hasFile('cv')) {
@@ -77,9 +79,9 @@ class PegawaiController extends Controller
 
         $request->validate([
             'nama' => 'required',
-            'email' => 'required|email|unique:pegawai,email,' . $pegawai->id,
+            'email' => 'required|email|unique:pegawais,email,' . $pegawai->id,
             'age' => 'required|integer',
-            'position' => 'required',
+            'posisi' => 'required',
             'cv' => 'nullable|mimes:pdf|max:2048',
         ]);
 

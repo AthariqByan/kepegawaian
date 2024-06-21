@@ -38,7 +38,7 @@
                                 <td>{{ $p->posisi }}</td>
                                 <td>
                                     @if ($p->cv)
-                                        <a href="{{ Storage::url($p->cv) }}" target="_blank">Lihat CV</a>
+                                        <a href="/storage/{{ $p->cv }}" target="_blank">Lihat CV</a>
                                     @endif
                                 </td>
                                 <td>
