@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PegawaiController extends Controller
 {
@@ -30,28 +31,28 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi request
-        // dd($request->all());
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:pegawais,email|max:255',
             'umur' => 'required|integer|min:0',
             'posisi' => 'required|string|max:255',
             'cv' => 'nullable|mimes:pdf|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-
-
-        // Menyimpan file CV jika ada
         if ($request->hasFile('cv')) {
-            $validatedData['cv'] = $request->file('cv')->store('cv');
+            $validatedData['cv'] = $request->file('cv')->store('cvs', 'public');
         }
 
-        // Membuat pegawai baru menggunakan pengisian massal yang aman
+        if ($request->hasFile('image')) {
+            $validatedData['image'] = $request->file('image')->store('images', 'public');
+        }
+
         Pegawai::create($validatedData);
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai Berhasil ditambahkan.');
+        // Menambahkan SweetAlert success message
+        Alert::success('Success', 'Pegawai berhasil ditambahkan.');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan.');
     }
 
     /**
@@ -77,26 +78,33 @@ class PegawaiController extends Controller
     {
         $pegawai = Pegawai::findOrFail($id);
 
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required|email|unique:pegawais,email,' . $pegawai->id,
-            'age' => 'required|integer',
-            'posisi' => 'required',
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:pegawais,email,' . $pegawai->id . '|max:255',
+            'umur' => 'required|integer|min:0',
+            'posisi' => 'required|string|max:255',
             'cv' => 'nullable|mimes:pdf|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->all();
         if ($request->hasFile('cv')) {
             if ($pegawai->cv) {
                 Storage::disk('public')->delete($pegawai->cv);
             }
-            $data['cv'] = $request->file('cv')->store('cvs', 'public');
+            $validatedData['cv'] = $request->file('cv')->store('cvs', 'public');
         }
 
-        $pegawai->update($data);
+        if ($request->hasFile('image')) {
+            if ($pegawai->image) {
+                Storage::disk('public')->delete($pegawai->image);
+            }
+            $validatedData['image'] = $request->file('image')->store('images', 'public');
+        }
 
-        Pegawai::where('id', $pegawai->id)->update($data);
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil di ubah.');
+        $pegawai->update($validatedData);
+
+        Alert::success('Success', 'Pegawai berhasil diubah.');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diubah.');
     }
 
     /**
@@ -107,8 +115,15 @@ class PegawaiController extends Controller
         if ($pegawai->cv) {
             Storage::disk('public')->delete($pegawai->cv);
         }
+        if ($pegawai->image) {
+            Storage::disk('public')->delete($pegawai->image);
+        }
         $pegawai->delete();
 
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai deleted successfully.');
+        $title = 'Hapus Data';
+        $text = "Apakah kamu yakin untuk menghapus??";
+        confirmDelete($title, $text);
+        return view('pegawai.index', compact('pegawai'));
+        // return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }

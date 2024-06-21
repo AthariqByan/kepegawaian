@@ -1,4 +1,5 @@
 @extends('layout.main')
+
 @section('container')
     <div class="pagetitle">
         <h1>Pegawai</h1>
@@ -12,52 +13,67 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-12">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPegawaiModal">
+            <div class="col-12">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPegawaiModal">
                     Tambah Data
                 </button>
 
                 <!-- Table with stripped rows -->
-                <table class="table datatable">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Umur</th>
-                            <th>Posisi</th>
-                            <th>CV</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pegawai as $p)
+                <div class="table-responsive">
+                    <table class="table table-striped datatable">
+                        <thead>
                             <tr>
-                                <td>{{ $p->nama }}</td>
-                                <td>{{ $p->email }}</td>
-                                <td>{{ $p->umur }}</td>
-                                <td>{{ $p->posisi }}</td>
-                                <td>
-                                    @if ($p->cv)
-                                        <a href="/storage/{{ $p->cv }}" target="_blank">Lihat CV</a>
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('pegawai.show', $p->id) }}" class="btn btn-info btn-sm">Lihat</a>
-                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editPegawaiModal{{ $p->id }}">
-                                        Ubah
-                                    </button>
-                                    <form action="{{ route('pegawai.destroy', $p->id) }}" method="POST"
-                                        style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                    </form>
-                                </td>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Umur</th>
+                                <th>Posisi</th>
+                                <th>CV</th>
+                                <th>Gambar</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($pegawai as $p)
+                                <tr>
+                                    <td>{{ $p->nama }}</td>
+                                    <td>{{ $p->email }}</td>
+                                    <td>{{ $p->umur }}</td>
+                                    <td>{{ $p->posisi }}</td>
+                                    <td>
+                                        @if ($p->cv)
+                                            <a href="/storage/{{ $p->cv }}" target="_blank"
+                                                class="btn btn-outline-primary btn-sm">View CV</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($p->image)
+                                            <img src="/storage/{{ $p->image }}" alt="{{ $p->nama }}"
+                                                class="img-thumbnail" style="max-width: 100px;">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('pegawai.show', $p->id) }}" class="btn btn-info btn-sm">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#editPegawaiModal{{ $p->id }}">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <form action="{{ route('pegawai.destroy', $p->id) }}" method="POST"
+                                            class="d-inline delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm delete-btn"
+                                                data-id="{{ $p->id }}">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 <!-- End Table with stripped rows -->
             </div>
         </div>
@@ -72,7 +88,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('pegawai.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('pegawai.store') }}" method="POST" enctype="multipart/form-data"
+                        id="addForm">
                         @csrf
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama</label>
@@ -111,6 +128,14 @@
                             <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
                                 id="cv" value="{{ old('cv') }}">
                             @error('cv')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Masukkan Gambar</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                name="image" id="image" value="{{ old('image') }}">
+                            @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -176,6 +201,14 @@
                                 <input type="file" class="form-control @error('cv') is-invalid @enderror"
                                     name="cv" id="cv">
                                 @error('cv')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Masukkan Gambar</label>
+                                <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                    name="image" id="image">
+                                @error('image')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

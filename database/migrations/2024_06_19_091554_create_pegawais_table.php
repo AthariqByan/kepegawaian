@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('umur');
             $table->string('posisi');
             $table->string('cv')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

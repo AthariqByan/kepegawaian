@@ -43,6 +43,7 @@
 <body>
     @include('layout.header')
     @include('layout.sidebar')
+    @include('sweetalert::alert')
     <main id="main" class="main">
         {{-- yield digunakan untuk meletakkan konten --}}
         @yield('container')
