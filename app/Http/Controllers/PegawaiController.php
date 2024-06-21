@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Posisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -14,11 +15,9 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = Pegawai::all();
-        $title = 'Hapus Data';
-        $text = "Apakah kamu yakin untuk menghapus??";
-        confirmDelete($title, $text);
-        return view('pegawai.index', compact('pegawai'));
+        $pegawai = Pegawai::with('posisi')->get(); // Memuat relasi posisi
+        $posisi = Posisi::all(); // Ambil semua posisi untuk dropdown
+        return view('pegawai.index', compact('pegawai', 'posisi'));
     }
 
     /**
@@ -26,7 +25,8 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.create');
+        $posisi = Posisi::all();
+        return view('pegawai.create', compact('posisi'));
     }
 
     /**
@@ -69,9 +69,11 @@ class PegawaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pegawai $pegawai)
+    public function edit($id)
     {
-        return view('pegawai.edit', compact('pegawai'));
+        $pegawai = Pegawai::findOrFail($id);
+        $posisi = Posisi::all();
+        return view('pegawai.edit', compact('pegawai', 'posisi'));
     }
 
     /**

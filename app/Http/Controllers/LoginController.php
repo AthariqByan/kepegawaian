@@ -39,8 +39,8 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Alert::success('success', 'Berhasil Logout.');
         Auth::logout();
+        Alert::success('success', 'Berhasil Logout.');
         return redirect()->route('login')->with('success', 'Kamu telah Logout');
     }
 
@@ -69,7 +69,6 @@ class LoginController extends Controller
 
         Alert::success('Success', 'Berhasil masuk.');
         if (Auth::attempt($login)) {
-            return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('login')->with('failed', 'Email atau password salah!');
         }

@@ -10,4 +10,9 @@ class Pegawai extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function posisi()
+    {
+        return $this->belongsTo(Posisi::class, 'posisi_id', 'id');
+    }
 }

@@ -18,6 +18,13 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('posisi.index') }}">
+                <i class="bi bi-clipboard-data"></i>
+                <span>Data Posisi</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('logout') }}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Logout</span>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use App\Models\Posisi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,9 @@ class AdminController extends Controller
     public function index()
     {
         $pegawaiCount = Pegawai::count();
+        $posisiCount = Posisi::count();
 
-        return view('dashboard/admin-dashboard', compact('pegawaiCount'));
+        return view('dashboard/admin-dashboard', compact('pegawaiCount', 'posisiCount'));
     }
     public function showUsers()
     {

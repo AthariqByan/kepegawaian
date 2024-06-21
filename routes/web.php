@@ -4,7 +4,9 @@ use App\Models\Pegawai;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PosisiController;
 use App\Http\Controllers\PegawaiController;
+use App\Models\Posisi;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'showUsers'])->name('users.index');
     Route::resource('/pegawai', PegawaiController::class);
+    Route::resource('/posisi', PosisiController::class);
 });
 
 
 Route::resource('/pegawai', PegawaiController::class);
+Route::resource('/posisi', PosisiController::class);
