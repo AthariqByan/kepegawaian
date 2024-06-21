@@ -15,6 +15,9 @@ class PegawaiController extends Controller
     public function index()
     {
         $pegawai = Pegawai::all();
+        $title = 'Hapus Data';
+        $text = "Apakah kamu yakin untuk menghapus??";
+        confirmDelete($title, $text);
         return view('pegawai.index', compact('pegawai'));
     }
 
@@ -119,11 +122,7 @@ class PegawaiController extends Controller
             Storage::disk('public')->delete($pegawai->image);
         }
         $pegawai->delete();
-
-        $title = 'Hapus Data';
-        $text = "Apakah kamu yakin untuk menghapus??";
-        confirmDelete($title, $text);
-        return view('pegawai.index', compact('pegawai'));
-        // return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
+        Alert::success('Success', 'Pegawai berhasil dihapus');
+        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }

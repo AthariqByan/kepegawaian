@@ -73,13 +73,13 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourEmail" class="form-label">Email/label>
-                                                <input type="email" name="email" class="form-control" id="yourEmail"
-                                                    required>
-                                                <div class="invalid-feedback">Tolong Masukkan Email Dengan Benar!</div>
+                                            <label for="yourEmail" class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" id="yourEmail"
+                                                required>
+                                            <div class="invalid-feedback">Tolong Masukkan Email Dengan Benar!</div>
                                         </div>
 
-                                        <div class="col-12">
+                                        {{-- <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
@@ -87,7 +87,7 @@
                                                     id="yourUsername" required>
                                                 <div class="invalid-feedback">Tolong Masukkan Username.</div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
@@ -139,34 +139,6 @@
     <script src="assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Sweetalert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if ($message = Session::get('success'))
-        <script>
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "{{ $message }}"
-            });
-        </script>
-    @endif
-    @if ($message = Session::get('failed'))
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Failed",
-                text: "{{ $message }}"
-            });
-        </script>
-    @endif
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
 
 </body>
 

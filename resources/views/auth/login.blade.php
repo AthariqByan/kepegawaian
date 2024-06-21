@@ -30,13 +30,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Nov 17 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -64,15 +57,16 @@
                                         <h5 class="card-title text-center pb-0 fs-4">Masuk</h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
-
+                                    <form action="{{ route('login_proses') }}" method="post"
+                                        class="row g-3 needs-validation" novalidate>
+                                        @csrf
+                                        @method('POST')
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Email</label>
+                                            <label for="yourEmail" class="form-label">Email</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Masukkan Email.</div>
+                                                <input type="email" name="email" class="form-control" id="yourEmail"
+                                                    required>
+                                                <div class="invalid-feedback">Masukkan Email yang valid.</div>
                                             </div>
                                         </div>
 
@@ -124,28 +118,6 @@
     <script src="assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Sweetalert -->
-    @if ($message = Session::get('success'))
-        <script>
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "{{ $message }}"
-            });
-        </script>
-    @endif
-    @if ($message = Session::get('failed'))
-        <script>
-            Swal.fire({
-                icon: "error",
-                title: "Failed",
-                text: "{{ $message }}"
-            });
-        </script>
-    @endif
-
-    <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
 
 </body>
 

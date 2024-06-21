@@ -37,4 +37,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::get('/users', [AdminController::class, 'showUsers'])->name('users.index');
     Route::resource('/pegawai', PegawaiController::class);
 });
+
+
 Route::resource('/pegawai', PegawaiController::class);
