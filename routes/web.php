@@ -33,7 +33,7 @@ Route::post('/register_proses', [LoginController::class, 'register_proses'])->na
 //Route untuk admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], function () {
     Route::get('/dashboard', [AdminController::class, 'showAdmin'])->name('dashboard');
-    // Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'showUsers'])->name('users.index');
     Route::resource('/pegawai', PegawaiController::class);
 });

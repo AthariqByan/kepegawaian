@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,17 +13,15 @@ class AdminController extends Controller
         return view('dashboard/admin-dashboard');
     }
 
-    // public function index()
-    // {
-    //     $kategoriCount = Kategori::count();
-    //     $newsCount = News::count();
-    //     $userCount = User::count();
+    public function index()
+    {
+        $pegawaiCount = Pegawai::count();
 
-    //     return view('dashboard/admin-dashboard', compact('kategoriCount', 'newsCount', 'userCount'));
-    // }
-    // public function showUsers()
-    // {
-    //     $users = User::all();
-    //     return view('dashboard/admin-users', compact('users'));
-    // }
+        return view('dashboard/admin-dashboard', compact('pegawaiCount'));
+    }
+    public function showUsers()
+    {
+        $users = User::all();
+        return view('dashboard/admin-users', compact('users'));
+    }
 }

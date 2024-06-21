@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -28,6 +29,7 @@ class LoginController extends Controller
             'password' => $request->password
         ];
 
+        Alert::success('Success', 'berhasil masuk.');
         if (Auth::attempt($data)) {
             return redirect()->route('admin.dashboard');
         } else {
@@ -37,6 +39,7 @@ class LoginController extends Controller
 
     public function logout()
     {
+        Alert::success('success', 'Berhasil Logout.');
         Auth::logout();
         return redirect()->route('login')->with('success', 'Kamu telah Logout');
     }
@@ -64,6 +67,7 @@ class LoginController extends Controller
             'password' => $request->password
         ];
 
+        Alert::success('Success', 'Berhasil masuk.');
         if (Auth::attempt($login)) {
             return redirect()->route('admin.dashboard');
         } else {

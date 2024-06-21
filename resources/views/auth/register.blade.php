@@ -64,7 +64,12 @@
                                         <p class="text-center small">Masukkan Data Pribadi Anda</p>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form action="{{ route('register_proses') }}" method="post"
+                                        class="row g-3
+                                         needs-validation"
+                                        novalidate>
+                                        @csrf
+                                        @method('POST')
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Nama</label>
                                             <input type="text" name="name" class="form-control" id="yourName"
@@ -78,16 +83,6 @@
                                                 required>
                                             <div class="invalid-feedback">Tolong Masukkan Email Dengan Benar!</div>
                                         </div>
-
-                                        {{-- <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Username</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Tolong Masukkan Username.</div>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="col-12">
                                             <label for="yourPassword" class="form-label">Password</label>
