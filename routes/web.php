@@ -41,6 +41,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::resource('/posisi', PosisiController::class);
 });
 
-
-Route::resource('/pegawai', PegawaiController::class);
-Route::resource('/posisi', PosisiController::class);

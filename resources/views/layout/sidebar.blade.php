@@ -11,14 +11,14 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('pegawai.index') }}">
+            <a class="nav-link collapsed" href="{{ route('admin.pegawai.index') }}">
                 <i class="bi bi-clipboard-data"></i>
                 <span>Data Pegawai</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('posisi.index') }}">
+            <a class="nav-link collapsed" href="{{ route('admin.posisi.index') }}">
                 <i class="bi bi-clipboard-data"></i>
                 <span>Data Posisi</span>
             </a>
