@@ -21,7 +21,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-3 font-weight-bold">Posisi :</div>
-                    <div class="col-md-9">{{ $pegawai->posisi }}</div>
+                    <div class="col-md-9">{{ $pegawai->posisi->posisi }}</div>
                 </div>
                 @if ($pegawai->cv)
                     <div class="row mb-3">
@@ -43,12 +43,12 @@
                 @endif
             </div>
             <div class="card-footer d-flex justify-content-between">
-                <a href="{{ route('pegawai.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('admin.pegawai.index') }}" class="btn btn-secondary">Kembali</a>
                 <div>
                     <button type="button" class="btn btn-warning mr-2" data-bs-toggle="modal"
                         data-bs-target="#editPegawaiModal">Ubah
                     </button>
-                    <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline"
+                    <form action="{{ route('admin.pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline"
                         onsubmit="return confirm('Are you sure you want to delete this employee?');">
                         @csrf
                         @method('DELETE')
@@ -68,7 +68,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('pegawai.update', $pegawai->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.pegawai.update', $pegawai->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">

@@ -19,7 +19,10 @@ class AdminController extends Controller
         $pegawaiCount = Pegawai::count();
         $posisiCount = Posisi::count();
 
-        return view('dashboard/admin-dashboard', compact('pegawaiCount', 'posisiCount'));
+        $jumlahPegawai = Pegawai::count();
+        $jumlahPosisi = Posisi::count();
+
+        return view('dashboard/admin-dashboard', compact('pegawaiCount', 'posisiCount', 'jumlahPegawai', 'jumlahPosisi'));
     }
     public function showUsers()
     {

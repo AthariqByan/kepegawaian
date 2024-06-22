@@ -53,6 +53,84 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
+        <!-- Reports -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reports <span>/Today</span></h5>
+
+                    <!-- Line Chart -->
+                    <div id="reportsChart"></div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const chart = new ApexCharts(document.querySelector("#reportsChart"), {
+                                series: [{
+                                    name: 'Pegawai',
+                                    data: [{{ $jumlahPegawai }}],
+                                }, {
+                                    name: 'Posisi',
+                                    data: [{{ $jumlahPosisi }}]
+                                }],
+                                chart: {
+                                    height: 350,
+                                    type: 'area',
+                                    animations: {
+                                        enabled: true, // Ensure animations are enabled
+                                        easing: 'easeinout',
+                                        speed: 800,
+                                        animateGradually: {
+                                            enabled: true,
+                                            delay: 150
+                                        },
+                                        dynamicAnimation: {
+                                            enabled: true,
+                                            speed: 350
+                                        }
+                                    },
+                                    toolbar: {
+                                        show: false
+                                    },
+                                },
+                                markers: {
+                                    size: 4
+                                },
+                                colors: ['#4154f1', '#2eca6a'],
+                                fill: {
+                                    type: "gradient",
+                                    gradient: {
+                                        shadeIntensity: 1,
+                                        opacityFrom: 0.3,
+                                        opacityTo: 0.4,
+                                        stops: [0, 90, 100]
+                                    }
+                                },
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                stroke: {
+                                    curve: 'smooth',
+                                    width: 2
+                                },
+                                xaxis: {
+                                    type: 'datetime',
+                                    categories: ["2024-06-22T00:00:00.000Z"] // Adjust to your current datetime
+                                },
+                                tooltip: {
+                                    x: {
+                                        format: 'dd/MM/yy HH:mm'
+                                    },
+                                }
+                            });
+
+                            chart.render();
+                        });
+                    </script>
+                    <!-- End Line Chart -->
+
+                </div>
+            </div>
+        </div><!-- End Reports -->
     </section>
     <!-- /.content -->
 @endsection

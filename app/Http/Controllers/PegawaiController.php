@@ -56,7 +56,7 @@ class PegawaiController extends Controller
 
         // Menambahkan SweetAlert success message
         Alert::success('Success', 'Pegawai berhasil ditambahkan.');
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil ditambahkan.');
+        return redirect()->route('admin.pegawai.index')->with('success', 'Pegawai berhasil ditambahkan.');
     }
 
     /**
@@ -74,7 +74,7 @@ class PegawaiController extends Controller
     {
         $pegawai = Pegawai::findOrFail($id);
         $posisi = Posisi::all();
-        return view('pegawai.edit', compact('pegawai', 'posisi'));
+        return view('admin.pegawai.edit', compact('pegawai', 'posisi'));
     }
 
     /**
@@ -110,7 +110,7 @@ class PegawaiController extends Controller
         $pegawai->update($validatedData);
 
         Alert::success('Success', 'Pegawai berhasil diubah.');
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diubah.');
+        return redirect()->route('admin.pegawai.index')->with('success', 'Pegawai berhasil diubah.');
     }
 
     /**
@@ -126,6 +126,6 @@ class PegawaiController extends Controller
         }
         $pegawai->delete();
         Alert::success('Success', 'Pegawai berhasil dihapus');
-        return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
+        return redirect()->route('admin.pegawai.index')->with('success', 'Pegawai berhasil dihapus.');
     }
 }
