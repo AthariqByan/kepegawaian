@@ -38,7 +38,7 @@
                                     <td>{{ $p->nama }}</td>
                                     <td>{{ $p->email }}</td>
                                     <td>{{ $p->umur }}</td>
-                                    <td>{{ $p->posisi }}</td>
+                                    <td>{{ $p->posisi->posisi }}</td>
                                     <td>
                                         @if ($p->cv)
                                             <a href="/storage/{{ $p->cv }}" target="_blank"
@@ -117,16 +117,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="posisi" class="form-label">Posisi</label>
-                            <input type="text" class="form-control @error('posisi') is-invalid @enderror" name="posisi"
-                                id="posisi" value="{{ old('posisi') }}">
-                            @error('posisi')
+                            <select class="form-control @error('posisi_id') is-invalid @enderror" name="posisi_id"
+                                id="posisi">
+                                <option value="">Pilih Posisi</option>
+                                @foreach ($posisi as $p)
+                                    <option value="{{ $p->id }}"
+                                        {{ old('posisi_id') == $p->posisi ? 'selected' : '' }}>
+                                        {{ $p->posisi }}</option>
+                                @endforeach
+                            </select>
+                            @error('posisi_id')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="cv" class="form-label">Masukkan CV</label>
                             <input type="file" class="form-control @error('cv') is-invalid @enderror" name="cv"
-                                id="cv" value="{{ old('cv') }}">
+                                id="cv">
                             @error('cv')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -134,7 +141,7 @@
                         <div class="mb-3">
                             <label for="image" class="form-label">Masukkan Gambar</label>
                             <input type="file" class="form-control @error('image') is-invalid @enderror"
-                                name="image" id="image" value="{{ old('image') }}">
+                                name="image" id="image">
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -148,6 +155,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Modal Edit Data -->
     @foreach ($pegawai as $p)
@@ -190,8 +198,15 @@
                             </div>
                             <div class="mb-3">
                                 <label for="posisi" class="form-label">Posisi</label>
-                                <input type="text" class="form-control @error('posisi') is-invalid @enderror"
-                                    name="posisi" id="posisi" value="{{ old('posisi', $p->posisi) }}">
+                                <select class="form-control @error('posisi') is-invalid @enderror" name="posisi"
+                                    id="posisi">
+                                    <option value="">Pilih Posisi</option>
+                                    @foreach ($posisi as $pos)
+                                        <option value="{{ $pos->id }}"
+                                            {{ old('posisi', $p->posisi_id) == $pos->id ? 'selected' : '' }}>
+                                            {{ $pos->posisi }}</option>
+                                    @endforeach
+                                </select>
                                 @error('posisi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

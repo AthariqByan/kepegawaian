@@ -13,6 +13,6 @@ class Pegawai extends Model
 
     public function posisi()
     {
-        return $this->belongsTo(Posisi::class, 'posisi_id', 'id');
+        return $this->belongsTo(Posisi::class);
     }
 }
