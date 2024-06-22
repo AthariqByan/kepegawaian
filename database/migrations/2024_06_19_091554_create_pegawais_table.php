@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->integer('umur');
-            $table->string('posisi');
             $table->string('cv')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+            $table->foreignId('posisi_id');
         });
     }
 

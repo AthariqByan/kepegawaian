@@ -34,11 +34,12 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:pegawais,email|max:255',
             'umur' => 'required|integer|min:0',
-            'posisi' => 'required|string|max:255',
+            'posisi_id' => 'required',
             'cv' => 'nullable|mimes:pdf|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
