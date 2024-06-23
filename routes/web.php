@@ -39,5 +39,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'as' => 'admin.'], 
     Route::get('/users', [AdminController::class, 'showUsers'])->name('users.index');
     Route::resource('/pegawai', PegawaiController::class);
     Route::resource('/posisi', PosisiController::class);
+    Route::delete('/admin/posisi/{id}', [PosisiController::class, 'destroy'])->name('admin.posisi.destroy');
 });
-

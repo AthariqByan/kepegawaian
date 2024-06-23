@@ -10,10 +10,8 @@
         </nav>
     </div><!-- End Page Title -->
 
-    </div>
     <div class="container mt-5">
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahPosisiModal">Tambah
-            Posisi</button>
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahPosisiModal">Tambah Posisi</button>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -25,20 +23,19 @@
                 </thead>
                 <tbody>
                     @foreach ($posisi as $posisis)
-                        <tr>
+                        <tr id="posisiRow{{ $posisis->id }}">
                             <td>{{ $posisis->id }}</td>
                             <td>{{ $posisis->posisi }}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#editPosisiModal" data-id="{{ $posisis->id }}"
-                                    data-posisi="{{ $posisis->posisi }}"> <i class="bi bi-pencil"></i></button>
-                                <form action="{{ route('admin.posisi.destroy', $posisis->id) }}" method="POST"
-                                    style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"> <i
-                                            class="bi bi-trash"></i></button>
-                                </form>
+                                    data-posisi="{{ $posisis->posisi }}">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm delete-btn"
+                                    data-id="{{ $posisis->id }}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -99,6 +96,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Script to handle edit modal
         var editPosisiModal = document.getElementById('editPosisiModal');
@@ -110,9 +109,33 @@
             var editPosisi = editPosisiModal.querySelector('#editPosisi');
             var editForm = editPosisiModal.querySelector('#editPosisiForm');
 
+            var modalTitle = editPosisiModal.querySelector('.modal-title');
             modalTitle.textContent = 'Edit Posisi: ' + posisi;
             editPosisi.value = posisi;
             editForm.action = '{{ route('admin.posisi.update', ':id') }}'.replace(':id', id);
+        });
+
+        // Handle delete button click
+        $(document).on('click', '.delete-btn', function() {
+            var id = $(this).data('id');
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            if (confirm('Apakah Anda yakin ingin menghapus posisi ini?')) {
+                $.ajax({
+                    url: '/admin/posisi/' + id,
+                    type: 'DELETE',
+                    data: {
+                        "_token": token,
+                    },
+                    success: function(response) {
+                        $('#posisiRow' + id).remove();
+                        alert('Posisi berhasil dihapus');
+                    },
+                    error: function(response) {
+                        alert('Terjadi kesalahan. Posisi gagal dihapus.');
+                    }
+                });
+            }
         });
     </script>
 @endsection

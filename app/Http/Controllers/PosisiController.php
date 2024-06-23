@@ -79,11 +79,7 @@ class PosisiController extends Controller
      */
     public function destroy($id)
     {
-        $posisi = Posisi::findOrFail($id);
-        $posisi->delete();
-
-        Alert::success('Success', 'Posisi berhasil dihapus');
-        return redirect()->route('admin.posisi.index')
-            ->with('success', 'Posisi berhasil dihapus');
+        Posisi::destroy($id);
+        return response()->json(['success' => 'Posisi berhasil dihapus']);
     }
 }

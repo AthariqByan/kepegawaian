@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -186,4 +187,5 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
     'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+    'DataTables' => Yajra\DataTables\Facades\DataTables::class,
 ];
