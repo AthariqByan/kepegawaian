@@ -20,7 +20,7 @@ use App\Models\Posisi;
 */
 
 Route::get('/', function () {
-    return view('/landingpage', ["pegawai" => Pegawai::get()]);
+    return view('auth.login');
 });
 
 //route login dan register
