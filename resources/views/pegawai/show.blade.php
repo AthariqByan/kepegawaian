@@ -16,6 +16,10 @@
                     <div class="col-md-9">{{ $pegawai->email }}</div>
                 </div>
                 <div class="row mb-3">
+                    <div class="col-md-3 font-weight-bold">No Telepon:</div>
+                    <div class="col-md-9">{{ $pegawai->no_telepon }}</div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-3 font-weight-bold">Umur :</div>
                     <div class="col-md-9">{{ $pegawai->umur }}</div>
                 </div>
@@ -89,6 +93,14 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="no_telepon" class="form-label">No Telepon</label>
+                            <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
+                                name="no_telepon" id="no_telepon" value="{{ old('no_telepon', $pegawai->no_telepon) }}">
+                            @error('no_telepon')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="umur" class="form-label">Umur</label>
                             <input type="text" class="form-control @error('umur') is-invalid @enderror" name="umur"
                                 id="umur" value="{{ old('umur', $pegawai->umur) }}">
@@ -98,8 +110,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="posisi" class="form-label">Posisi</label>
-                            <input type="text" class="form-control @error('posisi') is-invalid @enderror" name="posisi"
-                                id="posisi" value="{{ old('posisi', $pegawai->posisi) }}">
+                            <input type="text" class="form-control @error('posisi') is-invalid @enderror"
+                                name="posisi" id="posisi" value="{{ old('posisi', $pegawai->posisi) }}">
                             @error('posisi')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

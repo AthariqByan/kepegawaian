@@ -25,6 +25,7 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>No Telepon</th>
                                 <th>Umur</th>
                                 <th>Posisi</th>
                                 <th>CV</th>
@@ -37,6 +38,7 @@
                                 <tr>
                                     <td>{{ $p->nama }}</td>
                                     <td>{{ $p->email }}</td>
+                                    <td>{{ $p->no_telepon }}</td>
                                     <td>{{ $p->umur }}</td>
                                     <td>{{ $p->posisi->posisi }}</td>
                                     <td>
@@ -108,6 +110,14 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="no_telepon" class="form-label">No Telepon</label>
+                            <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
+                                name="no_telepon" id="no_telepon" value="{{ old('no_telepon') }}">
+                            @error('no_telepon')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="umur" class="form-label">Umur</label>
                             <input type="text" class="form-control @error('umur') is-invalid @enderror" name="umur"
                                 id="umur" value="{{ old('umur') }}">
@@ -122,7 +132,7 @@
                                 <option value="">Pilih Posisi</option>
                                 @foreach ($posisi as $p)
                                     <option value="{{ $p->id }}"
-                                        {{ old('posisi_id') == $p->posisi ? 'selected' : '' }}>
+                                        {{ old('posisi_id') == $p->id ? 'selected' : '' }}>
                                         {{ $p->posisi }}</option>
                                 @endforeach
                             </select>
@@ -185,6 +195,14 @@
                                 <input type="text" class="form-control @error('email') is-invalid @enderror"
                                     name="email" id="email" value="{{ old('email', $p->email) }}">
                                 @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="no_telepon" class="form-label">No Telepon</label>
+                                <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
+                                    name="no_telepon" id="no_telepon" value="{{ old('no_telepon', $p->no_telepon) }}">
+                                @error('no_telepon')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

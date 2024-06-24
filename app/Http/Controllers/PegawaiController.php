@@ -38,6 +38,7 @@ class PegawaiController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:pegawais,email|max:255',
+            'no_telepon' => 'required|string|max:15',
             'umur' => 'required|integer|min:0',
             'posisi_id' => 'required',
             'cv' => 'nullable|mimes:pdf|max:2048',
@@ -87,6 +88,7 @@ class PegawaiController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|unique:pegawais,email,' . $pegawai->id . '|max:255',
+            'no_telepon' => 'required|string|max:15',
             'umur' => 'required|integer|min:0',
             'posisi' => 'required|string|max:255',
             'cv' => 'nullable|mimes:pdf|max:2048',

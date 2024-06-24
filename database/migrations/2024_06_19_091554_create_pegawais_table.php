@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
+            $table->string('no_telepon', 15)->nullable();
             $table->integer('umur');
             $table->string('cv')->nullable();
             $table->string('image')->nullable();

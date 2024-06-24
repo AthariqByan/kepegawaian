@@ -34,6 +34,14 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">No Telepon</label>
+                                    <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
+                                        name="no_telepon" id="no_telepon" value="{{ old('no_telepon') }}">
+                                    @error('no_telepon')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Umur</label>
                                     <div class="col-sm-10">
