@@ -35,18 +35,9 @@ class PosisiController extends Controller
         ]);
 
         Posisi::create($request->all());
-        // Menambahkan SweetAlert success message
         Alert::success('Success', 'Posisi berhasil ditambahkan.');
         return redirect()->route('admin.posisi.index')
             ->with('success', 'Posisi berhasil dibuat.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -71,7 +62,8 @@ class PosisiController extends Controller
         $posisi->update($request->all());
 
         Alert::success('Success', 'Posisi berhasil diubah.');
-        return redirect()->route('posisi.index')->with('success', 'Posisi berhasil diubah.');
+        return redirect()->route('admin.posisi.index')
+            ->with('success', 'Posisi berhasil diubah.');
     }
 
     /**
